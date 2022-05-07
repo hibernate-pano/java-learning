@@ -39,7 +39,6 @@ public class ThreadLocalDemo {
             // 使用finally显式的清空ThreadLocal中的数据，避免复用。
             CURRENT_USER.remove();
         }
-
     }
 
 }
