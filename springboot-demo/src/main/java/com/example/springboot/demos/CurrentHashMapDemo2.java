@@ -74,7 +74,6 @@ public class CurrentHashMapDemo2 {
                 );
     }
 
-
     @GetMapping("good")
     public String good() throws InterruptedException {
         StopWatch stopWatch = new StopWatch();
