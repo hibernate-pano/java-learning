@@ -3,15 +3,15 @@ package com.example.springboot.demos;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Interesting {
+public class SynchronizedDemo {
 
     volatile int a = 1;
     volatile int b = 1;
 
     public static void main(String[] args) {
-        Interesting interesting = new Interesting();
-        new Thread(interesting::add).start();
-        new Thread(interesting::compare).start();
+        SynchronizedDemo synchronizedDemo = new SynchronizedDemo();
+        new Thread(synchronizedDemo::add).start();
+        new Thread(synchronizedDemo::compare).start();
     }
 
     public synchronized void add() {
