@@ -1,4 +1,4 @@
-package com.example.math.array;
+package com.example.algorithms.array;
 
 /**
  * 抽象list接口，具有所有list的集合属性

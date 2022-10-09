@@ -1,10 +1,11 @@
-package com.example.math.stack;
+package com.example.algorithms.stack;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
  * 一个可用的栈结构
+ *
  * @author pano
  * @date 2022/9/26
  **/

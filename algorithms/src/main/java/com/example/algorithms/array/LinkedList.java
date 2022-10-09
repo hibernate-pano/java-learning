@@ -1,4 +1,4 @@
-package com.example.math.array;
+package com.example.algorithms.array;
 
 import lombok.Data;
 
@@ -9,6 +9,18 @@ import lombok.Data;
 @Data
 public class LinkedList<T> implements AbstractList<T> {
 
+    transient int size = 0;
+
+    transient Node<T> first;
+
+    transient Node<T> last;
+
+    /**
+     * 空参数构造函数
+     */
+    public LinkedList() {
+    }
+
     /**
      * 新增节点
      *
@@ -17,7 +29,7 @@ public class LinkedList<T> implements AbstractList<T> {
      */
     @Override
     public boolean add(T t) {
-        return false;
+        return addFirst(t);
     }
 
     /**
@@ -28,7 +40,17 @@ public class LinkedList<T> implements AbstractList<T> {
      */
     @Override
     public boolean addFirst(T t) {
-        return false;
+        final Node<T> font = first;
+        final Node<T> newNode = new Node<>(null, t, font);
+        first = newNode;
+        if (font != null) {
+            font.setPrev(newNode);
+        } else {
+            last = newNode;
+        }
+        // 修改链表长度
+        size++;
+        return true;
     }
 
     /**
@@ -39,7 +61,17 @@ public class LinkedList<T> implements AbstractList<T> {
      */
     @Override
     public boolean addLast(T t) {
-        return false;
+        final Node<T> back = last;
+        final Node<T> newNode = new Node<>(back, t, null);
+        last = newNode;
+        if (back != null) {
+            back.setNext(newNode);
+        } else {
+            first = newNode;
+        }
+        // 修改链表长度
+        size++;
+        return true;
     }
 
     /**
@@ -49,7 +81,15 @@ public class LinkedList<T> implements AbstractList<T> {
      */
     @Override
     public T pop() {
-        return null;
+        if (last == null) {
+            return null;
+        }
+        final Node<T> back = last;
+        last = back.getPrev();
+        last.setNext(null);
+        // 修改链表长度
+        size--;
+        return back.getValue();
     }
 
     /**
@@ -60,7 +100,15 @@ public class LinkedList<T> implements AbstractList<T> {
      */
     @Override
     public T get(int i) {
-        return null;
+        // 判断长度
+        if (i >= size) {
+            return null;
+        }
+        Node<T> font = first;
+        for (int j = 0; j < i; j++) {
+            font = font.getNext();
+        }
+        return font.getValue();
     }
 
     /**
@@ -71,6 +119,9 @@ public class LinkedList<T> implements AbstractList<T> {
      */
     @Override
     public boolean remove(T t) {
+
+
+        size--;
         return false;
     }
 
