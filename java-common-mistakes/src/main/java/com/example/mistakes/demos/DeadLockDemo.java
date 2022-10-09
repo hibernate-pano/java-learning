@@ -19,6 +19,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
+/**
+ * @author pano
+ */
 @Slf4j
 @RestController
 @RequestMapping("deadlock")

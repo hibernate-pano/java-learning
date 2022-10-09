@@ -99,30 +99,67 @@ public class LinkedList<T> implements AbstractList<T> {
      * @return 下标=i的元素
      */
     @Override
-    public T get(int i) {
+    public Node<T> get(int i) {
         // 判断长度
         if (i >= size) {
             return null;
         }
-        Node<T> font = first;
+        Node<T> node = first;
         for (int j = 0; j < i; j++) {
-            font = font.getNext();
+            node = node.getNext();
         }
-        return font.getValue();
+        return node;
     }
 
     /**
      * 删除一个元素
+     *
+     * @param node node
+     * @return 操作结果
+     */
+    @Override
+    public T remove(Node<T> node) {
+        if (node == null){
+            return null;
+        }
+        final T element = node.getValue();
+        final Node<T> prev = node.getPrev();
+        final Node<T> next = node.getNext();
+        // 去头
+        if (prev == null){
+            first = next;
+        } else {
+            prev.setNext(next);
+            node.setPrev(null);
+        }
+        // 去尾
+        if (next == null){
+            last = prev;
+        } else {
+            next.setPrev(prev);
+            node.setNext(null);
+        }
+        node.setValue(null);
+        size--;
+        return element;
+    }
+
+    /**
+     * 根据值删除一个元素
      *
      * @param t t
      * @return 操作结果
      */
     @Override
     public boolean remove(T t) {
-
-
-        size--;
-        return false;
+        // 遍历整个链表，获取value=t的元素，并删除
+        for (int i = 0; i < size; i++) {
+            Node<T> node = get(i);
+            if (node.getValue().equals(t)){
+                remove(node);
+            }
+        }
+        return true;
     }
 
     /**
@@ -132,8 +169,9 @@ public class LinkedList<T> implements AbstractList<T> {
      * @return 操作结果
      */
     @Override
-    public boolean removeByIndex(int i) {
-        return false;
+    public T removeByIndex(int i) {
+        Node<T> node = get(i);
+        return remove(node);
     }
 
     /**
@@ -141,6 +179,10 @@ public class LinkedList<T> implements AbstractList<T> {
      */
     @Override
     public void printList() {
-
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            sb.append(get(i).getValue().toString());
+        }
+        System.out.println(sb);
     }
 }

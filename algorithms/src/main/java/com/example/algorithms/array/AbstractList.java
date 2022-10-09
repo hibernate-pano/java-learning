@@ -40,16 +40,23 @@ public interface AbstractList<T> {
     T pop();
 
     /**
-     * 获取下标=i的元素
+     * 获取下标=i的 Node
      *
      * @param i 下标
      * @return 下标=i的元素
      */
-    T get(int i);
+    Node<T> get(int i);
 
     /**
      * 删除一个元素
      *
+     * @param node node
+     * @return 操作结果
+     */
+    T remove(Node<T> node);
+
+    /**
+     * 根据值删除一个元素
      * @param t t
      * @return 操作结果
      */
@@ -61,7 +68,7 @@ public interface AbstractList<T> {
      * @param i 下标
      * @return 操作结果
      */
-    boolean removeByIndex(int i);
+    T removeByIndex(int i);
 
     /**
      * 打印列表数据

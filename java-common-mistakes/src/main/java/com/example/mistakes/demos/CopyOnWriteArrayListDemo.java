@@ -21,7 +21,10 @@ import java.util.stream.IntStream;
 @RequestMapping("copy_on_write_array_list")
 public class CopyOnWriteArrayListDemo {
 
-    //测试并发写的性能
+    /**
+     * 测试并发写的性能
+     * @return
+     */
     @GetMapping("write")
     public Map<String, Object> testWrite() {
         List<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
@@ -46,12 +49,18 @@ public class CopyOnWriteArrayListDemo {
         return result;
     }
 
-    //帮助方法用来填充List
+    /**
+     * 帮助方法用来填充List
+     * @param list
+     */
     private void addAll(List<Integer> list) {
         list.addAll(IntStream.rangeClosed(1, 1000000).boxed().collect(Collectors.toList()));
     }
 
-    //测试并发读的性能
+    /**
+     * 测试并发读的性能
+     * @return
+     */
     @GetMapping("read")
     public Map<String, Object> testRead() {
         //创建两个测试对象
