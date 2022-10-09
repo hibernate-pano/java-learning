@@ -5,28 +5,28 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.7</version>
+        <version>2.7.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>java-common-mistakes</artifactId>
+    <artifactId>java-learning</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>java-common-mistakes</name>
-    <description>java-common-mistakes</description>
+    <name>java-learning</name>
+    <description>java-learning</description>
+    <packaging>pom</packaging>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
+    <modules>
+        <module>algorithms</module>
+        <module>design-patterns</module>
+        <module>java-mistakes</module>
+        <module>leetcode</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
