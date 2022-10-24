@@ -2,13 +2,14 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.example</groupId>
         <artifactId>java-learning</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>java-mistakes</artifactId>
+    <artifactId>stream</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>java-mistakes</name>
-    <description>java-mistakes</description>
+    <name>stream</name>
+    <description>stream</description>
 </project>
