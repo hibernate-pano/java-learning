@@ -23,6 +23,7 @@
         <module>java-mistakes</module>
         <module>leetcode</module>
         <module>stream</module>
+        <module>lambda</module>
     </modules>
     <dependencies>
         <dependency>
