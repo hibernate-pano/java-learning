@@ -1,4 +1,4 @@
-package com.example.lamda.demo;
+package com.example.stream.stream;
 
 import java.util.ArrayList;
 import java.util.List;

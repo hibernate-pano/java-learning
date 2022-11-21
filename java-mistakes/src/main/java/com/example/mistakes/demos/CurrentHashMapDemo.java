@@ -28,7 +28,9 @@ public class CurrentHashMapDemo {
     //总元素数量
     private static final int ITEM_COUNT = 1000;
 
-    //帮助方法，用来获得一个指定元素数量模拟数据的ConcurrentHashMap
+    /**
+     * 帮助方法，用来获得一个指定元素数量模拟数据的ConcurrentHashMap
+     */
     private ConcurrentHashMap<String, Long> getData(int count) {
         return LongStream.rangeClosed(1, count)
                 .boxed()
@@ -54,8 +56,8 @@ public class CurrentHashMapDemo {
                                 .rangeClosed(1, 10)
                                 .parallel()
                                 .forEach(i -> {
-                                            // 此处不是线程安全的，CurrentHashMap本身安全不代表此处获取size再put数据也是线程安全的
-                                            // 所以加上 synchronized 关键字
+                                            // fixme !! 此处不是线程安全的，CurrentHashMap本身安全不代表此处获取size再put数据也是线程安全的
+                                            // fixme !! 所以加上 synchronized 关键字
                                             synchronized (this) {
                                                 //查询还需要补充多少个元素
                                                 int gap = ITEM_COUNT - concurrentHashMap.size();

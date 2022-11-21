@@ -23,7 +23,8 @@
         <module>java-mistakes</module>
         <module>leetcode</module>
         <module>stream</module>
-        <module>lambda</module>
+        <module>security</module>
+        <module>concurrency</module>
     </modules>
     <dependencies>
         <dependency>
