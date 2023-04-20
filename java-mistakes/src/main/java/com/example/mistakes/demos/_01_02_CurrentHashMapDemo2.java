@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
 @Slf4j
 @RestController
 @RequestMapping("current_hash_map")
-public class CurrentHashMapDemo2 {
+public class _01_02_CurrentHashMapDemo2 {
 
     /**
      * 循环次数

@@ -21,12 +21,21 @@ import java.util.stream.LongStream;
 @Slf4j
 @RestController
 @RequestMapping("current_hash_map")
-public class CurrentHashMapDemo {
+public class _01_01_CurrentHashMapDemo {
 
     //线程个数
     private static final int THREAD_COUNT = 10;
     //总元素数量
     private static final int ITEM_COUNT = 1000;
+
+    public static void main(String[] args) {
+        _01_01_CurrentHashMapDemo currentHashMapDemo = new _01_01_CurrentHashMapDemo();
+        try {
+            currentHashMapDemo.wrong();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 帮助方法，用来获得一个指定元素数量模拟数据的ConcurrentHashMap
@@ -44,7 +53,7 @@ public class CurrentHashMapDemo {
 
     @GetMapping("wrong")
     public String wrong() throws InterruptedException {
-        ConcurrentHashMap<String, Long> concurrentHashMap = getData(ITEM_COUNT - 100);
+        ConcurrentHashMap<String, Long> concurrentHashMap = this.getData(ITEM_COUNT - 100);
         //初始900个元素
         log.info("init size:{}", concurrentHashMap.size());
 
@@ -58,22 +67,21 @@ public class CurrentHashMapDemo {
                                 .forEach(i -> {
                                             // fixme !! 此处不是线程安全的，CurrentHashMap本身安全不代表此处获取size再put数据也是线程安全的
                                             // fixme !! 所以加上 synchronized 关键字
-                                            synchronized (this) {
+                                            synchronized (_01_01_CurrentHashMapDemo.this) {
                                                 //查询还需要补充多少个元素
                                                 int gap = ITEM_COUNT - concurrentHashMap.size();
                                                 log.info("gap size:{}", gap);
                                                 //补充元素
-                                                concurrentHashMap.putAll(getData(gap));
+                                                concurrentHashMap.putAll(_01_01_CurrentHashMapDemo.this.getData(gap));
                                             }
                                         }
                                 )
         );
         //等待所有任务完成
         forkJoinPool.shutdown();
-        forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
+        boolean b = forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
         //最后元素个数会是1000吗？
-        log.info("finish size:{}", concurrentHashMap.size());
+        log.info("finish size:{},result:{}", concurrentHashMap.size(), b);
         return "OK";
     }
-
 }

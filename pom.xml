@@ -25,6 +25,7 @@
         <module>stream</module>
         <module>security</module>
         <module>concurrency</module>
+        <module>spring-mistakes</module>
     </modules>
     <dependencies>
         <dependency>
