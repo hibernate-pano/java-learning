@@ -103,5 +103,4 @@ public class _01_02_CurrentHashMapDemo2 {
         log.info(stopWatch.prettyPrint());
         return "OK";
     }
-
 }
