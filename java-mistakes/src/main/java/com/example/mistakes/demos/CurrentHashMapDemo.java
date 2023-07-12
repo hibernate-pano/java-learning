@@ -21,7 +21,7 @@ import java.util.stream.LongStream;
 @Slf4j
 @RestController
 @RequestMapping("current_hash_map")
-public class _01_01_CurrentHashMapDemo {
+public class CurrentHashMapDemo {
 
     //线程个数
     private static final int THREAD_COUNT = 10;
@@ -29,7 +29,7 @@ public class _01_01_CurrentHashMapDemo {
     private static final int ITEM_COUNT = 1000;
 
     public static void main(String[] args) {
-        _01_01_CurrentHashMapDemo currentHashMapDemo = new _01_01_CurrentHashMapDemo();
+        CurrentHashMapDemo currentHashMapDemo = new CurrentHashMapDemo();
         try {
             currentHashMapDemo.wrong();
         } catch (InterruptedException e) {
@@ -60,23 +60,18 @@ public class _01_01_CurrentHashMapDemo {
         ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
         //使用线程池并发处理逻辑
         forkJoinPool.execute(
-                () ->
-                        IntStream
-                                .rangeClosed(1, 10)
-                                .parallel()
-                                .forEach(i -> {
-                                            // fixme !! 此处不是线程安全的，CurrentHashMap本身安全不代表此处获取size再put数据也是线程安全的
-                                            // fixme !! 所以加上 synchronized 关键字
-                                            synchronized (_01_01_CurrentHashMapDemo.this) {
-                                                //查询还需要补充多少个元素
-                                                int gap = ITEM_COUNT - concurrentHashMap.size();
-                                                log.info("gap size:{}", gap);
-                                                //补充元素
-                                                concurrentHashMap.putAll(_01_01_CurrentHashMapDemo.this.getData(gap));
-                                            }
-                                        }
-                                )
-        );
+                () -> IntStream.rangeClosed(1, 10).parallel()
+                        .forEach(i -> {
+                            // !! 此处不是线程安全的，CurrentHashMap本身安全不代表此处获取size再put数据也是线程安全的
+                            // !! 所以加上 synchronized 关键字
+                            synchronized (CurrentHashMapDemo.this) {
+                                //查询还需要补充多少个元素
+                                int gap = ITEM_COUNT - concurrentHashMap.size();
+                                log.info("gap size:{}", gap);
+                                //补充元素
+                                concurrentHashMap.putAll(CurrentHashMapDemo.this.getData(gap));
+                            }
+                        }));
         //等待所有任务完成
         forkJoinPool.shutdown();
         boolean b = forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
