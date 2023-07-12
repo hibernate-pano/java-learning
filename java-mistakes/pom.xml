@@ -11,4 +11,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>java-mistakes</name>
     <description>java-mistakes</description>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.16</version>
+        </dependency>
+    </dependencies>
 </project>
