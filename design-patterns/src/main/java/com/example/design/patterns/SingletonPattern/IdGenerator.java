@@ -1,4 +1,4 @@
-package com.example.design.patterns.SingletonDesignPattern;
+package com.example.design.patterns.SingletonPattern;
 
 import lombok.Getter;
 
