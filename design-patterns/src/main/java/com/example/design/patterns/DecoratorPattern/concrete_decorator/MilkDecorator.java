@@ -3,7 +3,6 @@ package com.example.design.patterns.DecoratorPattern.concrete_decorator;
 import com.example.design.patterns.DecoratorPattern.component.Coffee;
 import com.example.design.patterns.DecoratorPattern.decorator.CoffeeDecorator;
 import com.example.design.patterns.DecoratorPattern.enums.CoffeeOrderOptionEnum;
-import org.springframework.stereotype.Component;
 
 /**
  * 具体装饰者 - 加牛奶
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
  * @author pano
  * @date 2024/1/2
  **/
-@Component
 public class MilkDecorator extends CoffeeDecorator {
 
     // 牛奶价格，从枚举中获取

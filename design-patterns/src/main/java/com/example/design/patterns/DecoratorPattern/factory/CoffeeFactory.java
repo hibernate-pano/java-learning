@@ -5,6 +5,7 @@ import com.example.design.patterns.DecoratorPattern.component.Coffee;
 import com.example.design.patterns.DecoratorPattern.concrete_component.SimpleCoffee;
 import com.example.design.patterns.DecoratorPattern.decorator.CoffeeDecorator;
 import com.example.design.patterns.DecoratorPattern.enums.CoffeeOrderOptionEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
  * @date 2024/1/2
  **/
 @Component
+@Slf4j
 public class CoffeeFactory {
 
     public static Coffee makeCoffee(CoffeeOrderOptions options) {
@@ -27,7 +29,7 @@ public class CoffeeFactory {
                     try {
                         coffee = (CoffeeDecorator) Class.forName(value.getDecoratorClassName()).getConstructor(Coffee.class).newInstance(coffee);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        log.error("makeCoffee error = {}", e.getMessage());
                     }
                 }
             }
