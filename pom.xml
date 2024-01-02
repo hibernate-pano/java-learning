@@ -26,6 +26,7 @@
         <module>security</module>
         <module>concurrency</module>
         <module>spring-mistakes</module>
+        <module>sharing-sphere</module>
     </modules>
     <dependencies>
         <dependency>

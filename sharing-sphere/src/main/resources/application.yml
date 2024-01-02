@@ -1,0 +1,85 @@
+server:
+  port: 8844
+
+spring:
+  application:
+    name: @artifactId@
+  shardingsphere:
+    # 数据源配置
+    datasource:
+      names: ds0,ds1
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/mall_0?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+        username: root
+        password: mysql@@2020
+      ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3307/mall_1?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+        username: root
+        password: mysql@@2020
+    # 定义规则
+    rules:
+      sharding:
+        # 数据分片规则配置
+        tables:
+          # 指定某个表的分片配置，逻辑表名
+          t_order:
+            # 这个配置是告诉sharding有多少个库和多少个表及所在实际的数据库节点，由数据源名 + 表名组成（参考 Inline 语法规则）
+            actual-data-nodes: ds$->{0..1}.t_order_$->{0..1} # 此处使用下方定义的读写分离数据源
+            database-strategy:
+              standard:
+                sharding-column:
+                sharding-algorithm-name:
+            # 配置表分片策略
+            table-strategy:
+              # 用于单分片键的标准分片场景
+              standard:
+                # 分片列名称
+                sharding-column: main_class
+                # 分片算法名称
+                sharding-algorithm-name: t_goods_table_inline
+            # 分布式序列策略
+            key-generate-strategy:
+              # 自增列名称，缺省表示不使用自增主键生成器
+              column: goods_id
+              # 分布式序列算法名称
+              key-generator-name: snowflake
+        # 分片算法配置
+        sharding-algorithms:
+          # 分片算法名称
+          t_goods_table_inline:
+            # 分片算法类型
+            type: INLINE
+            # 分片算法属性配置
+            props:
+              algorithm-expression: t_goods_${main_class % 2}
+        # 分布式序列算法配置（如果是自动生成的，在插入数据的sql中就不要传id，null也不行，直接插入字段中就不要有主键的字段）
+        keyGenerators:
+          # 分布式序列算法名称
+          snowflake:
+            # 分布式序列算法类型
+            type: SNOWFLAKE
+      readwrite-splitting:
+        dataSources:
+          readwrite_ds: # 此处定义的数据源名称在上分分表中使用
+            staticStrategy:
+              writeDataSourceName: write_ds1
+              readDataSourceNames:
+                - read_ds1
+                - read_ds2
+            # dynamicStrategy:
+            loadBalancerName: myBalancer
+        load-balancers:
+          myBalancer:
+            type: RANDOM
+            props:
+              transactionalReadQueryStrategy: PRIMARY
+    props:
+      sql-show: true #显示sql
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
