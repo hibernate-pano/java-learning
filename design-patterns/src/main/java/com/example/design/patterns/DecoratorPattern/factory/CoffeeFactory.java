@@ -18,7 +18,7 @@ public class CoffeeFactory {
 
     public static Coffee makeCoffee(CoffeeOrderOptions options) {
 
-        // 1. 选择咖啡豆
+        // 1. 选择基础咖啡。这个是装饰器的基础。装饰器必须有一个被装饰的基础存在
         Coffee coffee = new SimpleCoffee();
 
         // 2. 选择调料
@@ -27,6 +27,7 @@ public class CoffeeFactory {
             for (CoffeeOrderOptionEnum value : CoffeeOrderOptionEnum.values()) {
                 if (value.name().equals(option)) {
                     try {
+                        // 通过反射实例化装饰器
                         coffee = (CoffeeDecorator) Class.forName(value.getDecoratorClassName()).getConstructor(Coffee.class).newInstance(coffee);
                     } catch (Exception e) {
                         log.error("makeCoffee error = {}", e.getMessage());

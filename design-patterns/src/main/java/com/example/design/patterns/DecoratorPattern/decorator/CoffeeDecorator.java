@@ -11,7 +11,7 @@ import com.example.design.patterns.DecoratorPattern.component.Coffee;
 public abstract class CoffeeDecorator extends Coffee {
 
     /**
-     * 被装饰的对象
+     * 被装饰的对象作为参数
      */
     protected Coffee coffee;
 
