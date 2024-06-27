@@ -1,4 +1,4 @@
-package com.example.concurrency.gold;
+package com.example.concurrency.level2;
 
 /**
  * @author pano

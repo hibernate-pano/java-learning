@@ -1,4 +1,4 @@
-package com.example.concurrency.bronze;
+package com.example.concurrency.level1;
 
 import java.util.LinkedList;
 
