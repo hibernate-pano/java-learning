@@ -5,7 +5,7 @@ package com.example.concurrency.level1;
  *
  * @author panbo
  */
-public class ThreadCreate {
+public class ThreadCreate01 {
 
     public static void main(String[] args) {
         Thread a = new Thread(new ThreadA());

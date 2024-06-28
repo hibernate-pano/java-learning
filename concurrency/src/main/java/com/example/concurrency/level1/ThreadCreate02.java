@@ -1,7 +1,7 @@
 package com.example.concurrency.level1;
 
 /**
- * 这个方法中，我们创建了两个 ThreadExample 对象，并调用了 run 方法和 start 方法。
+ * 这个方法中，我们创建了两个 ThreadCreate02 对象，并调用了 run 方法和 start 方法。
  * 这两个方法的区别在于：run 方法是直接调用，而 start 方法是将线程放入线程池中等待执行。
  * 因此，run 方法和 start 方法的区别在于：
  * 1. run 方法是直接调用，而 start 方法是将线程放入线程池中等待执行。
@@ -38,10 +38,10 @@ package com.example.concurrency.level1;
  *
  * @author panbo
  */
-public class ThreadExample extends Thread {
+public class ThreadCreate02 extends Thread {
     public static void main(String[] args) {
-        ThreadExample thread1 = new ThreadExample();
-        ThreadExample thread2 = new ThreadExample();
+        ThreadCreate02 thread1 = new ThreadCreate02();
+        ThreadCreate02 thread2 = new ThreadCreate02();
 
         // 直接调用 run 方法
         thread1.run();
