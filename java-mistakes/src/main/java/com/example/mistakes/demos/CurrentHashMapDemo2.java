@@ -88,6 +88,7 @@ public class CurrentHashMapDemo2 {
     @GetMapping("good")
     public String good() throws InterruptedException {
         StopWatch stopWatch = new StopWatch();
+        // 开始计时. 普通用法
         stopWatch.start("normalUse");
         Map<String, Long> normalUse = normalUse();
         stopWatch.stop();
@@ -95,11 +96,14 @@ public class CurrentHashMapDemo2 {
         Assert.isTrue(normalUse.size() == ITEM_COUNT, "normalUse size error");
         //校验累计总数
         Assert.isTrue(normalUse.values().stream().mapToLong(aLong -> aLong).reduce(0, Long::sum) == LOOP_COUNT, "normalUse count error");
+
+        // 开始计时. 正确用法
         stopWatch.start("goodUse");
         Map<String, Long> goodUse = goodUse();
         stopWatch.stop();
         Assert.isTrue(goodUse.size() == ITEM_COUNT, "goodUse size error");
         Assert.isTrue(goodUse.values().stream().mapToLong(aLong -> aLong).reduce(0, Long::sum) == LOOP_COUNT, "goodUse count error");
+
         log.info(stopWatch.prettyPrint());
         return "OK";
     }

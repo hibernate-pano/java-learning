@@ -40,7 +40,7 @@ public class LeaveAuditStrategyFactory {
      * 私有化构造函数
      */
     private LeaveAuditStrategyFactory() {
-        this.strategyList.addAll(applicationContext.getBeansOfType(LeaveAuditStrategy.class).values());
+        strategyList.addAll(applicationContext.getBeansOfType(LeaveAuditStrategy.class).values());
     }
 
     /**

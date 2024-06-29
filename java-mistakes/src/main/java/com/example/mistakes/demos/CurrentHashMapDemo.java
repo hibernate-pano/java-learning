@@ -33,6 +33,7 @@ public class CurrentHashMapDemo {
         try {
             currentHashMapDemo.wrong();
         } catch (InterruptedException e) {
+            log.error("error", e);
             e.printStackTrace();
         }
     }
@@ -60,18 +61,42 @@ public class CurrentHashMapDemo {
         ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
         //使用线程池并发处理逻辑
         forkJoinPool.execute(
-                () -> IntStream.rangeClosed(1, 10).parallel()
-                        .forEach(i -> {
-                            // !! 此处不是线程安全的，CurrentHashMap本身安全不代表此处获取size再put数据也是线程安全的
-                            // !! 所以加上 synchronized 关键字
-                            synchronized (CurrentHashMapDemo.this) {
-                                //查询还需要补充多少个元素
-                                int gap = ITEM_COUNT - concurrentHashMap.size();
-                                log.info("gap size:{}", gap);
-                                //补充元素
-                                concurrentHashMap.putAll(CurrentHashMapDemo.this.getData(gap));
-                            }
-                        }));
+                () -> IntStream.rangeClosed(1, 10).parallel().forEach(i -> {
+                    // !! 此处不是线程安全的，CurrentHashMap本身安全不代表此处获取size再put数据也是线程安全的
+                    //查询还需要补充多少个元素
+                    int gap = ITEM_COUNT - concurrentHashMap.size();
+                    log.info("gap size:{}", gap);
+                    //补充元素
+                    concurrentHashMap.putAll(CurrentHashMapDemo.this.getData(gap));
+                }));
+        //等待所有任务完成
+        forkJoinPool.shutdown();
+        boolean b = forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
+        //最后元素个数会是1000吗？
+        log.info("finish size:{},result:{}", concurrentHashMap.size(), b);
+        return "OK";
+    }
+
+    @GetMapping("/right")
+    public String right() throws InterruptedException {
+        ConcurrentHashMap<String, Long> concurrentHashMap = this.getData(ITEM_COUNT - 100);
+        //初始900个元素
+        log.info("init size:{}", concurrentHashMap.size());
+
+        ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
+        //使用线程池并发处理逻辑
+        forkJoinPool.execute(
+                () -> IntStream.rangeClosed(1, 10).parallel().forEach(i -> {
+                    // !! 此处不是线程安全的，CurrentHashMap本身安全不代表此处获取size再put数据也是线程安全的
+                    // !! 所以加上 synchronized 关键字
+                    synchronized (this) {
+                        //查询还需要补充多少个元素
+                        int gap = ITEM_COUNT - concurrentHashMap.size();
+                        log.info("gap size:{}", gap);
+                        //补充元素
+                        concurrentHashMap.putAll(CurrentHashMapDemo.this.getData(gap));
+                    }
+                }));
         //等待所有任务完成
         forkJoinPool.shutdown();
         boolean b = forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
