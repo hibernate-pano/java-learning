@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -23,9 +22,10 @@ public class CopyOnWriteArrayListDemo {
 
     /**
      * 测试并发写的性能
+     *
      * @return
      */
-    @GetMapping("write")
+    @GetMapping("/write")
     public Map<String, Object> testWrite() {
         List<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
         List<Integer> synchronizedList = Collections.synchronizedList(new ArrayList<>());
@@ -51,17 +51,19 @@ public class CopyOnWriteArrayListDemo {
 
     /**
      * 帮助方法用来填充List
+     *
      * @param list
      */
     private void addAll(List<Integer> list) {
-        list.addAll(IntStream.rangeClosed(1, 1000000).boxed().collect(Collectors.toList()));
+        list.addAll(IntStream.rangeClosed(1, 1000000).boxed().toList());
     }
 
     /**
      * 测试并发读的性能
+     *
      * @return
      */
-    @GetMapping("read")
+    @GetMapping("/read")
     public Map<String, Object> testRead() {
         //创建两个测试对象
         List<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
