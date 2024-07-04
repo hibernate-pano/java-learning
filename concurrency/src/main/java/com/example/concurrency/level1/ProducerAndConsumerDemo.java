@@ -25,6 +25,7 @@ public class ProducerAndConsumerDemo {
      * 野怪投放【生产者】
      */
     static class WildMonsterProducer implements Runnable {
+        @Override
         public void run() {
             try {
                 createWildMonster();
@@ -37,7 +38,7 @@ public class ProducerAndConsumerDemo {
         public void createWildMonster() throws InterruptedException {
             for (int i = 0; i < 10; i++) {
                 synchronized (WILD_MONSTER_AREA) {
-                    if (WILD_MONSTER_AREA.size() == 0) {
+                    if (WILD_MONSTER_AREA.isEmpty()) {
                         WILD_MONSTER_AREA.add("野怪" + i);
                         System.out.println(WILD_MONSTER_AREA.getLast());
                         WILD_MONSTER_AREA.notify();
@@ -52,6 +53,7 @@ public class ProducerAndConsumerDemo {
      * 兰陵王，打野英雄
      */
     static class LanLingWang implements Runnable {
+        @Override
         public void run() {
             try {
                 attackWildMonster();
@@ -64,7 +66,7 @@ public class ProducerAndConsumerDemo {
         public void attackWildMonster() throws InterruptedException {
             while (true) {
                 synchronized (WILD_MONSTER_AREA) {
-                    if (WILD_MONSTER_AREA.size() == 0) {
+                    if (WILD_MONSTER_AREA.isEmpty()) {
                         System.out.println("LLW等待");
                         WILD_MONSTER_AREA.wait();
                     }
