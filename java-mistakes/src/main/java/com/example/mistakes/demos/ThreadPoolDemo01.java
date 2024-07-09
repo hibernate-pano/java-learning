@@ -67,7 +67,7 @@ public class ThreadPoolDemo01 {
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
             int id = atomicInteger.incrementAndGet();
             try {
@@ -77,6 +77,7 @@ public class ThreadPoolDemo01 {
                     try {
                         TimeUnit.SECONDS.sleep(10);
                     } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
                     log.info("{} finished", id);
                 });
