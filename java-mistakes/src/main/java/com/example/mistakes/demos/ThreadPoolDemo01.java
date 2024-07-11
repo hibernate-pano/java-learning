@@ -50,11 +50,13 @@ public class ThreadPoolDemo01 {
 
 
     public static void main(String[] args) throws InterruptedException {
+
         //使用一个计数器跟踪完成的任务数
         AtomicInteger atomicInteger = new AtomicInteger();
         //创建一个具有2个核心线程、5个最大线程，使用容量为10的ArrayBlockingQueue阻塞队列作为工作队列的线程池，使用默认的AbortPolicy拒绝策略
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
-                2, 5,
+                0,
+                5,
                 5, TimeUnit.SECONDS,
                 new ArrayBlockingQueue<>(10),
                 new ThreadFactoryBuilder().setNamePrefix("demo-thread-pool-").build(),
