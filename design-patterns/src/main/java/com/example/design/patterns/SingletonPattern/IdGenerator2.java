@@ -30,13 +30,12 @@ public class IdGenerator2 {
     /**
      * 懒汉式单例模式
      */
-    public static synchronized IdGenerator2 getInstance() {
+    public static IdGenerator2 getInstance() {
         if (instance == null) {
             instance = new IdGenerator2();
         }
         return instance;
     }
-
 
     public long getId() {
         return id.incrementAndGet();

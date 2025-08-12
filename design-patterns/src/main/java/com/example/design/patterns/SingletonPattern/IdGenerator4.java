@@ -16,8 +16,9 @@ public enum IdGenerator4 {
     private final AtomicLong id = new AtomicLong(0);
 
     public static void main(String[] args) {
-        System.out.println(IdGenerator4.INSTANCE.getId());
-        System.out.println(IdGenerator4.INSTANCE.getId());
+//        System.out.println(IdGenerator.getInstance().getId());
+//        System.out.println(IdGenerator2.getInstance().getId());
+//        System.out.println(IdGenerator3.getInstance().getId());
         System.out.println(IdGenerator4.INSTANCE.getId());
     }
 
