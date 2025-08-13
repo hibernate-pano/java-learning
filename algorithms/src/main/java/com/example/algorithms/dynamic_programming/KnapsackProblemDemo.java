@@ -1,5 +1,8 @@
 package com.example.algorithms.dynamic_programming;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 01-背包问题
  * <p>
@@ -54,12 +57,53 @@ public class KnapsackProblemDemo {
     }
 
     public static void main(String[] args) {
-        int n = 3;
-        int W = 5;
-        int[] w = {1, 2, 3};
-        int[] v = {6, 10, 12};
+//        int n = 3;
+//        int W = 5;
+//        int[] w = {1, 2, 3};
+//        int[] v = {6, 10, 12};
+//
+//        int result = method1(n, W, v, w);
+//        System.out.println(result);
 
-        int result = method1(n, W, v, w);
-        System.out.println(result);
+
+        int result2 = numberOfWays(226, 1);
+        System.out.println(result2);
+    }
+
+    /**
+     * 给你两个 正整数 n 和 x 。
+     * 请你返回将 n 表示成一些"互不相同"正整数的 x 次幂之和的方案数。换句话说，你需要返回互不相同整数 [n^1, n^2, ..., n^k] 的集合数目，满足 n = n1^x + n2^x + ... + nk^x 。
+     * 由于答案可能非常大，请你将它对 10^9 + 7 取余后返回。
+     * 比方说，n = 160 且 x = 3 ，一个表示 n 的方法是 n = 2^3 + 3^3 + 5^3 。
+     *
+     * @param n 正整数 n ，是最后的总和
+     * @param x 幂次 x
+     * @return 方案数
+     */
+    public static int numberOfWays(int n, int x) {
+        final int MOD = 1_000_000_007;
+        // 状态定义
+        int[] dp = new int[n + 1];
+        // 初始化
+        dp[0] = 1;
+        // 获取所有的备选的幂值(物品的价值)
+        List<Integer> powers = new ArrayList<>();
+        for (int i = 1; ; i++) {
+            long pow = (long) Math.pow(i, x);
+            if (pow > n) {
+                break;
+            }
+            powers.add((int) pow);
+        }
+        // 状态转移方程
+        for (int pow : powers) {
+            // pow 一定是小于 n 的，因为上面已经过滤掉了所有大于 n 的pow
+            // 倒序执行，避免数据的重复，严格遵守0-1原则
+            for (int i = n; i > pow - 1; i--) {
+                // 第 i 个数组成的方案数 = 不选择第 i 个数 + 选择了第 i 个数
+                dp[i] = (dp[i] + dp[i - pow]) % MOD;
+            }
+        }
+        return dp[n];
     }
 }
