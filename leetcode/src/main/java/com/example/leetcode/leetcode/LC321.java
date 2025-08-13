@@ -5,7 +5,7 @@ package com.example.leetcode.leetcode;
  * @date 2022/10/14
  * @url <a href="https://leetcode.cn/problems/create-maximum-number/">create-maximum-number</a>
  */
-public class Leetcode321 {
+public class LC321 {
 
     public static void main(String[] args) {
 

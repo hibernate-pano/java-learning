@@ -10,7 +10,7 @@ import java.util.Map;
  * @date 2022/10/17
  * @url <a href="https://leetcode.cn/problems/fruit-into-baskets/">fruit-into-baskets</a>
  **/
-public class Leetcode904 {
+public class LC904 {
 
     public static void main(String[] args) {
         int[] fruits = {3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4};

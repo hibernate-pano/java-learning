@@ -5,7 +5,7 @@ package com.example.leetcode.leetcode;
  * @date 2022/10/23
  * @url <a href="https://leetcode.cn/problems/merge-strings-alternately/">merge-strings-alternately</a>
  **/
-public class Leetcode1768 {
+public class LC1768 {
 
     public static void main(String[] args) {
 

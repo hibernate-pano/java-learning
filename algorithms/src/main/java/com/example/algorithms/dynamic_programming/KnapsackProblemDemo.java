@@ -65,8 +65,7 @@ public class KnapsackProblemDemo {
 //        int result = method1(n, W, v, w);
 //        System.out.println(result);
 
-
-        int result2 = numberOfWays(226, 1);
+        int result2 = numberOfWays(243, 1);
         System.out.println(result2);
     }
 

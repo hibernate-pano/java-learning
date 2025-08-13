@@ -5,7 +5,7 @@ package com.example.leetcode.leetcode;
  * @date 2022/10/13
  * @url <a href="https://leetcode.cn/problems/max-chunks-to-make-sorted/">max-chunks-to-make-sorted</a>
  **/
-public class Leetcode769 {
+public class LC769 {
 
     public static void main(String[] args) {
         int[] arr1 = {4, 3, 2, 1, 0};
@@ -15,13 +15,13 @@ public class Leetcode769 {
         int[] arr6 = {0, 1, 2, 3, 4};
         int[] arr7 = {0, 1};
         int[] arr8 = {0};
-        System.out.println(Leetcode769.maxChunksToSorted(arr1));
-        System.out.println(Leetcode769.maxChunksToSorted(arr2));
-        System.out.println(Leetcode769.maxChunksToSorted(arr3));
-        System.out.println(Leetcode769.maxChunksToSorted(arr4));
-        System.out.println(Leetcode769.maxChunksToSorted(arr6));
-        System.out.println(Leetcode769.maxChunksToSorted(arr7));
-        System.out.println(Leetcode769.maxChunksToSorted(arr8));
+        System.out.println(LC769.maxChunksToSorted(arr1));
+        System.out.println(LC769.maxChunksToSorted(arr2));
+        System.out.println(LC769.maxChunksToSorted(arr3));
+        System.out.println(LC769.maxChunksToSorted(arr4));
+        System.out.println(LC769.maxChunksToSorted(arr6));
+        System.out.println(LC769.maxChunksToSorted(arr7));
+        System.out.println(LC769.maxChunksToSorted(arr8));
     }
 
     public static int maxChunksToSorted(int[] arr) {

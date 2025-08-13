@@ -8,12 +8,12 @@ import java.util.List;
  * @date 2022/10/15
  * @url <a href="https://leetcode.cn/problems/build-an-array-with-stack-operations/">build-an-array-with-stack-operations</a>
  **/
-public class Leetcode1441 {
+public class LC1441 {
 
     public static void main(String[] args) {
         int[] target = {1, 3};
         int n = 3;
-        System.out.println(Leetcode1441.buildArray(target, n));
+        System.out.println(LC1441.buildArray(target, n));
     }
 
     public static List<String> buildArray(int[] target, int n) {

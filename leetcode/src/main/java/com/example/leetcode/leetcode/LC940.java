@@ -5,7 +5,7 @@ package com.example.leetcode.leetcode;
  * @date 2022/10/14
  * @url <a href="https://leetcode.cn/problems/distinct-subsequences-ii/">distinct-subsequences-ii</a>
  **/
-public class Leetcode940 {
+public class LC940 {
 
     public static void main(String[] args) {
 
