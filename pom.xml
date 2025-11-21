@@ -20,13 +20,7 @@
     <modules>
         <module>algorithms</module>
         <module>design-patterns</module>
-        <module>java-mistakes</module>
         <module>leetcode</module>
-        <module>stream</module>
-        <module>security</module>
-        <module>concurrency</module>
-        <module>spring-mistakes</module>
-        <module>sharing-sphere</module>
     </modules>
     <dependencies>
         <dependency>
